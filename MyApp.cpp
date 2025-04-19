@@ -1,4 +1,3 @@
-
 #include "MyApp.h"
 #include "MyFrame.h"
 
