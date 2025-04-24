@@ -16,8 +16,8 @@ set(${PROJECT_NAME}_VERSION_MAJOR 1.0) # версия проэкта
 # указываем какие библиотеки искать Set это папка где искать
 #find_package(Poco REQUIRED Foundation)
 find_package(wxWidgets REQUIRED COMPONENTS net core base)
-set(wxWidgets_ROOT_DIR "/usr/local/include/")
-set(wxWidgets_LIB_DIR "/usr/local/include/wx-3.2/")
+#set(wxWidgets_ROOT_DIR "/usr/local/include/")
+#set(wxWidgets_LIB_DIR "/usr/local/include/wx-3.2/")
 # ----------------Генерация релиза или дебаг сборки
 # ----------------------------------
 
