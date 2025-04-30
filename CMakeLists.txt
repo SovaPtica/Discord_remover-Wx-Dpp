@@ -15,6 +15,7 @@ set(${PROJECT_NAME}_VERSION_MAJOR 1.0) # версия проэкта
 # проэкта
 # указываем какие библиотеки искать Set это папка где искать
 #find_package(Poco REQUIRED Foundation)
+find_package(dpp REQUIRED)
 find_package(wxWidgets REQUIRED COMPONENTS net core base)
 #set(wxWidgets_ROOT_DIR "/usr/local/include/")
 #set(wxWidgets_LIB_DIR "/usr/local/include/wx-3.2/")
@@ -35,14 +36,17 @@ find_package(wxWidgets REQUIRED COMPONENTS net core base)
 # компилятору set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")  #флаги
 # компилятору set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")  #флаги
 # компилятору
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20") # флаги компилятору
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23") # флаги компилятору
                                                      # последняя версия
                                                      # стандарта
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 
 # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c89") #для языка c set(CMAKE_C_FLAGS
 # "${CMAKE_C_FLAGS} -std=c90") #для языка c set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}
 # -std=c99") #для языка c
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11") # для языка c
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c17") # для языка c
 
 # ------------------------------------- Добавление каталогов в которых назодится
 # проэкт и оптимизация-------
@@ -55,9 +59,17 @@ set(CMAKE_BUILD_TYPE Debug)
 # --------------Создание исполняемого файла ----------------
 
 # set(SOURCES main.cpp) or
-file(GLOB CPPS "*.cpp" "*/*.cpp") # Добавляются все файлы в дериктории которой
+#file(GLOB CPPS "*.cpp" "*/*.cpp") # Добавляются все файлы в дериктории которой
                                   # лежит этот файл
 
+add_executable(${PROJECT_NAME} 
+   Drawnig_interface.cpp
+   Drowning_wx_menu.cpp
+   Discord_remover.cpp
+   MyApp.cpp
+   MyFrame.cpp
+   Save_load_settings.cpp
+   )
 # --------------------------Создание библиотек-----------------------
 
 # add_library(${PROJECT_NAME}_lib SHARED press_key.cpp class.cpp    )
@@ -79,14 +91,15 @@ include(${wxWidgets_USE_FILE})
 # -------------------------------
 # add_exacutable(${PROJECT_NAME} main.cpp) #Как в 31 строке только нужно вручную
 # указывать все файлы add_exacutable(${PROJECT_NAME} ${SOURCES}) or
-add_executable(${PROJECT_NAME} ${CPPS})
+#add_executable(${PROJECT_NAME} ${CPPS})
 
 #target_include_directories(${PROJECT_NAME}
 #                          PUBLIC /home/repa/boost.1.81.0/include)
 # -------------------
+target_link_libraries(${PROJECT_NAME}  dpp::dpp)
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
-target_link_directories(${PROJECT_NAME} PRIVATE ${POCO_LIB_PATH})
- target_link_libraries(${PROJECT_NAME} PocoFoundation)
+#target_link_directories(${PROJECT_NAME} PRIVATE ${POCO_LIB_PATH})
+#target_link_libraries(${PROJECT_NAME} PocoFoundation)
 # target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_lib::lib_1 )
 
 # cmake_minimum_required(VERSION 3.5)

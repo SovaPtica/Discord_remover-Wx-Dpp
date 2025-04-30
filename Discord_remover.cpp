@@ -43,6 +43,7 @@ void MyFrame::discord_remover() {
 }
 
 void MyFrame::GetIdList(wxCommandEvent &event) {
+   if(server_id.empty()){
   wxTextEntryDialog dialog(this, wxT("Введите ID сeрвера:"),
                            wxT("Установить Channel ID"),
                            std::to_string(server_id));
@@ -68,6 +69,7 @@ void MyFrame::GetIdList(wxCommandEvent &event) {
       std::cout << "Ошибка преобразования channel_id: " << e.what()
                 << std::endl;
     }
+   }
   }
 
   if (true) {
@@ -154,41 +156,5 @@ void MyFrame::DeleteMessage(wxCommandEvent &event) {
                 wxMessageBox(msg, wxT("Успех"), wxOK | wxICON_INFORMATION);
             });
 }
-
-/* Заготовка
- void MyFrame::GetBotToken(wxCommandEvent &event)
-{
-        // Цикл до корректного ввода
-     while (true)
-     {
-         wxTextEntryDialog dialog(nullptr,
-                                  wxT("Введите строку ровно из 72 символов:"),
-                                  wxT("Ввод строки"));
-
-         if (dialog.ShowModal() == wxID_OK)
-         {
-             input = dialog.GetValue();
-
-             if (input.Length() == 72)
-             {
-                 token = std::string(input.mb_str()); // сохранить в
-                 std::string break; // корректный ввод
-             }
-             else
-             {
-                 wxMessageBox(wxT("Строка должна содержать ровно 72
-                 символа."), wxT("Ошибка"), wxOK | wxICON_ERROR);
-             }
-         }
-         else
-         {
-             //return false; // пользователь нажал Cancel — выход из
-             приложения
-         }
-     }
-
-
- }
- */
 
 

@@ -14,7 +14,6 @@ void MyFrame::drowning_wx_menu()
 
   wxMenu *get_channel_list = new wxMenu;
   get_channel_list->Append(ID_getChannelList, wxT("Получить список каналов"));
-  get_channel_list->Append(ID_getBotToken, wxT("Заготовка"));
 
 
   wxMenuBar *menuBar = new wxMenuBar;
@@ -25,6 +24,5 @@ void MyFrame::drowning_wx_menu()
   SetMenuBar(menuBar);
 
   Bind(wxEVT_MENU, &MyFrame::GetIdList, this , ID_getChannelList);
- //заготовка Bind(wxEVT_MENU, &MyFrame::GetBotToken, this , ID_getBotToken);
 
 }

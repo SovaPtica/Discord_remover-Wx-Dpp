@@ -1,8 +1,9 @@
 #include "MyApp.h"
 #include "MyFrame.h"
+#include <wx/event.h>
 
 bool MyApp::OnInit() {
-  MyFrame *frame = new MyFrame();
+     MyFrame *frame = new MyFrame();
   frame->Show(true);
   return true;
 }
@@ -10,10 +11,20 @@ bool MyApp::OnInit() {
 void MyFrame::OnExit(wxCommandEvent &event) { Close(true); }
 
 void MyFrame::OnAbout(wxCommandEvent &event) {
-  wxMessageBox("This is a wxWidgets Hello World example", "About Hello World",
+  wxMessageBox(wxT("Пример"),wxT( "Приложение для управления Discord"),
                wxOK | wxICON_INFORMATION);
 }
 
 void MyFrame::OnHello(wxCommandEvent &event) {
-  wxLogMessage("Hello world from wxWidgets!");
+  wxLogMessage(wxT("Привет "));
 }
+
+void MyFrame::OnComboBoxSelect(wxCommandEvent &event) {
+    int selection = comboBox->GetSelection();
+    if (selection != wxNOT_FOUND && selection < my_channels.size()) {
+      channel_id = my_channels[selection].id;
+      std::cout << "Выбран канал: " << my_channels[selection].chanelName
+                << " (ID: " << channel_id << ")" << std::endl;
+    }
+}
+
