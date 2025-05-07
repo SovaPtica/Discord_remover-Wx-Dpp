@@ -28,3 +28,22 @@ void MyFrame::OnComboBoxSelect(wxCommandEvent &event) {
     }
 }
 
+void MyFrame::UpdateTheme()
+{
+    // Обновляем все цвета
+    wxColour bgCol = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
+    wxColour fgCol = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT);
+    
+    SetBackgroundColour(bgCol);
+    SetForegroundColour(fgCol);
+    
+    // Рекурсивно обновляем все дочерние элементы
+    wxWindowList& children = GetChildren();
+    for (wxWindow* child : children) {
+        child->SetBackgroundColour(bgCol);
+        child->SetForegroundColour(fgCol);
+        child->Refresh();
+    }
+    
+    Refresh();
+}

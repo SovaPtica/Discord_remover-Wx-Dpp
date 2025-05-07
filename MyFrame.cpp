@@ -1,4 +1,6 @@
 #include "MyFrame.h"
+#include <wx/event.h>
+#include <wx/gdicmn.h>
 
 MyFrame::MyFrame()
     : wxFrame(NULL, wxID_ANY, "Discor control", wxDefaultPosition,
@@ -76,6 +78,16 @@ MyFrame::MyFrame()
     //   return 1;
   }
 
+ // Использовать нативные элементы управления
+    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+    SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    // Для Windows 10/11 темного режима:
+  #ifdef __WXMSW__
+    if (IsDarkMode()) {
+        wxMSWDarkMode::Enable();
+    }
+  #endif
+
   discord_remover();
   drowning_interface();
   drowning_wx_menu();
@@ -86,7 +98,13 @@ MyFrame::MyFrame()
   Bind(wxEVT_MENU, &MyFrame::OnHello, this, ID_Hello);
   Bind(wxEVT_MENU, &MyFrame::OnAbout, this, wxID_ABOUT);
   Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
-  
+  // В конструкторе окна:
+  Bind(wxEVT_SYS_COLOUR_CHANGED, [this](wxSysColourChangedEvent& event) {
+      UpdateTheme();
+      event.Skip();
+  });
 }
 
 MyFrame::~MyFrame() { SaveSettings(); }
+
+

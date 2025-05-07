@@ -27,6 +27,7 @@ class MyFrame : public wxFrame
       void DeleteMessage(wxCommandEvent& event);//удаление сообщений
       void SaveSettings();// Сохранение настроек программы 
       void LoadSettings();// загрузка настроек 
+      void UpdateTheme();
 
       wxString input;// для ввода Токена в стартовом окне 
       std::string token;
