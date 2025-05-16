@@ -1,0 +1,72 @@
+# Манифест Flatpak для сборки приложения
+id: com.remove_discord.MyApp
+# Уникальный идентификатор приложения
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+# Версия runtime, должна соответствовать SDK
+sdk: org.freedesktop.Sdk
+command: mainn
+# Имя бинарного файла, который запускается (должно соответствовать имени, установленному через make install)
+#disable-debuginfo: true
+# Отключает генерацию отладочной информации
+#filesystem: xdgrun/flatpak-builder
+# Доступ к специфической директории для flatpak-builder (возможно, не требуется, можно удалить, если не используется)
+finish-args:
+  # Разрешения для приложения
+  - --share=network
+    # Доступ к сети (для D++)
+  - --socket=x11
+    # Поддержка X11 для GUI
+  - --socket=wayland
+    # Поддержка Wayland для GUI
+  - --device=dri
+    # Доступ к Direct Rendering Infrastructure (для аппаратного ускорения графики)
+  - --filesystem=home
+    # Доступ к домашней директории
+    
+modules:
+  # D++ (Discord++)
+  - name: dpp
+    buildsystem: cmake
+    config-opts:
+      - -DDPP_BUILD_TEST=OFF
+        # Отключает сборку тестов
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+        # Включает позиционно-независимый код
+    sources:
+      - type: git
+        url: https://github.com/brainboxdotcc/DPP.git
+        tag: v10.0.29
+        # Версия D++
+
+  # wxWidgets
+  - name: wxwidgets
+    buildsystem: autotools
+    config-opts:
+      - --with-gtk=3
+        # Использует GTK3 для GUI
+      - --enable-unicode
+        # Включает поддержку Unicode
+    sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.2.1/wxWidgets-3.2.2.1.tar.bz2
+        sha256: dffcb6be71296fff4b7f8840eb1b510178f57aa2eb236b20da41182009242c02
+
+  # Ваше приложение
+  - name: mainn
+    buildsystem: cmake
+    sources:
+      - type: dir
+        path: .
+        # Локальная директория проекта
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+        # Релизный режим сборки
+      - -DCMAKE_EXPORT_COMPILE_COMMANDS=ON  # Включает генерацию compile_commands.json
+    build-commands:
+      # Установка бинарного файла
+      - make install
+      # Копирование иконки
+      - install -Dm644 data/com.remove_discord.MyApp.png /app/share/icons/hicolor/256x256/apps/com.remove_discord.MyApp.png
+      # Копирование .desktop файла
+      - install -Dm644 data/com.remove_discord.MyApp.desktop /app/share/applications/com.remove_discord.MyApp.desktop

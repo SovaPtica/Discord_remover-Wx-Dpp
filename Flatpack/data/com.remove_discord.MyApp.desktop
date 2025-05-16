@@ -1,0 +1,19 @@
+# Файл .desktop для интеграции приложения в меню
+[Desktop Entry]
+Name=TestMyApp
+# Название приложения (с большой буквы для стандарта)
+Exec=/usr/bin/flatpak run com.remove_discord.MyApp
+TryExec=flatpak run com.remove_discord.MyApp
+# Команда для запуска через Flatpak
+Type=Application
+# Тип записи — приложение
+Icon=com.remove_discord.MyApp
+# Имя иконки, совпадает с app-id
+Comment=A C++ application using wxWidgets and D++
+# Описание приложения
+Categories=Messader;
+# Категория для меню
+Terminal=false
+# Не запускать в терминале
+StartupWMClass=myapp
+
