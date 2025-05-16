@@ -7,5 +7,5 @@ flatpak install org.freedesktop.Sdk//23.08
 flatpak-builder --user --install build-dir flatpak/my_project.json --force-clean
 
 # Запуск
-flatpak run com.example.MyProject
+flatpak run com.remove_discord.MyApp
 
