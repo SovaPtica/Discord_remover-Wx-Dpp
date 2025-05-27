@@ -30,3 +30,5 @@ flatpak run com.remove_discord.MyApp
 
 5: Удаление
 flatpak uninstall  com.remove_discord.MyApp
+
+Работает на Windows и Linux, под Mac не проверял.
