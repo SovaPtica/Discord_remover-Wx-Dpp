@@ -10,7 +10,7 @@ MyFrame::MyFrame()
   // Цикл до корректного ввода
   while (token.empty()) {
     wxTextEntryDialog dialog(nullptr,
-                             wxT("Введите строку ровно из 72 символов:"),
+                             wxT("Введите токен вашего боита для подключения:"),
                              wxT("Ввод строки"));
 
     if (dialog.ShowModal() == wxID_OK) {
