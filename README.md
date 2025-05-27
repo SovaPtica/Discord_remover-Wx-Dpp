@@ -9,16 +9,18 @@
 - После можно выбрать промежуток времени и имя сервера в котором нужно удалить Сообщения
 
 Команды для компиляции с помощью Cmake .
-1: Войдите в папку build  и введите (cmake ..) , после окончания процесса введите cmake --build . и после окончания процесса  запустите файл main .
+-
+- 1: Войдите в папку build  и введите (cmake ..) , после окончания процесса введите cmake --build . и после окончания процесса  запустите файл main .
 
 Вот команды Для сборки и запуска через flatpak
 
-1: Откройте в консоли папку Flatpak
-2: Установите зависимости под вашу систему
-sudo apt install flatpak flatpak-builder
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install org.freedesktop.Platform//23.08
-flatpak install org.freedesktop.Sdk//23.08
+- 1: Откройте в консоли папку Flatpak
+
+- 2: Установите зависимости под вашу систему
+- sudo apt install flatpak flatpak-builder
+- flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+- flatpak install org.freedesktop.Platform//23.08
+- flatpak install org.freedesktop.Sdk//23.08
 
 3: команда для сборки и установки пакета . Скачает и установит все зависимости после саму программу . 
 flatpak-builder --user --install build-dir com.remove_discord.MyApp.yml --force-clean
